@@ -32,31 +32,51 @@ function calibrate()
     <div id="invade"></div>
 
     <script>
-function isRevisit(url)
+function isRevisit(site)
 {
-    hostname = url.split("//")[1].split("/")[0]
+    var url = urls[site][0];
+   // hostname = url.split("//")[1].split("/")[0]
     t1 = new Date();
     var x = document.createElement("IMG")
     x.onload = function(){
         document.body.appendChild(x);
         elapsed = ((new Date()).getTime() - t1.getTime());
-        if ( elapsed < max_elapse)
-            mesg = "You have been to " + hostname +", haven't you!";
-        else
-            mesg = "I'm guessing you haven't been to " + hostname;
-        document.getElementById("invade").innerHTML = mesg + " DEBUG(" + elapsed + "/" + max_elapse + ")";
+        if (elapsed < max_elapse){
+            urls[site][2] = 1;
+                document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + urls[site][1] + "<br />";
+        }
+     //   document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + "<br />" + mesg + " DEBUG(" + elapsed + "/" + max_elapse + ")";
     }
     x.src = url
 }
 
-setTimeout(function () { isRevisit("http://diply.com/v2/img/diply.jpg"); }, 3000);
+//setTimeout(function () { isRevisit("https://www.facebook.com/rsrc.php/v3/yn/r/m1WkWOIIcpj.png"); }, 3000);
 var urls = [
-    ["", "Google"]
-    ["", "YouTube"],
-    ["https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia_wordmark.png", "Wikipedia"],
-    ["http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png", "Ebay"],
-    ["https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico", "Netflix"],
+    ["https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png", "Google", 0],
+    ["https://s.ytimg.com/yts/imgbin/www-hitchhiker-vflNVER5Q.webp", "YouTube", 0],
+    ["https://www.facebook.com/rsrc.php/v3/yn/r/m1WkWOIIcpj.png", "Facebook", 0],
+    ["https://www.redditstatic.com/sprite-reddit.6Om8v6KMv28.png", "Reddit", 0],
+    ["https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global_bluebeacon-1x_optimized._CB281044790_.png", "Amazon", 0],
+    ["https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia_wordmark.png", "Wikipedia", 0],
+    ["https://s.yimg.com/zz/nn/lib/metro/g/my/yahoo_en-US_f_p_190x45_2x.png", "Yahoo", 0],
+    ["https://abs.twimg.com/a/1491551685/img/search/ic_places_foursquare_logo.png", "Twitter", 0],
+    ["http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png", "Ebay", 0],
+    ["https://assets.nflxext.com/ffe/siteui/acquisition/home/thisIsNetflix/modules/asset_cancelanytime_withdevice.png", "Netflix", 0],
+    ["http://s.imgur.com/images/site-sprite.png?1430420391", "imgur", 0],
+    ["https://static.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y", "LinkedIn", 0],
+    ["https://www.instagram.com/static/sprites/core/8f1312.png", "Instagram", 0],
+    ["https://www.craigslist.org/images/map/zoom-in.png", "Craigslist", 0],
+    ["http://diply.com/v2/img/diply.jpg", "Diply", 0]
 ];
+setTimeout(function () {
+    for (i = 0; i < urls.length; i++) {
+        isRevisit(i);
+        if(urls[i][2] == 1){
+        document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + urls[i][1] + "<br />";
+            }
+    }
+}, 3000);
+
         //https://rawgit.com/xAlanna/CSC203_/master/Project1AShalinskiCSC203.html
     </script>
 </body>
