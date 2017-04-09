@@ -28,10 +28,17 @@ function calibrate()
     </script>
 
     <img src="https://www.amazon.com/empty.gif" onload="calibrate()"><br>
-    Let me check on your browsing history.
-    <div id="visited"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /></div>
+    <div>Let me check on your browsing history.</div>
+    <table style="border-spacing:50px 0;text-align:center;">
+        <tr>
+            <td id="visited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /><br /></td>
+            <td id="notvisited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>These are the ones you haven't visited:</b><br /><br/></td>
+        </tr>
+    </table>
     <br />
-    <div id="notvisited"><b>These are the ones you haven't visited:</b><br /></div>
+    <!--<div id="visited"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /></div>
+    <br />
+    <div id="notvisited"><b>These are the ones you haven't visited:</b><br /></div>-->
 
     <script>
 function isRevisit(site)
@@ -39,6 +46,7 @@ function isRevisit(site)
     var url = urls[site][0];
     t1 = new Date();
     var x = document.createElement("IMG")
+    x.style.display = "none";
     x.onload = function(){
         document.body.appendChild(x);
         elapsed = ((new Date()).getTime() - t1.getTime());
@@ -68,13 +76,23 @@ var urls = [
     ["https://www.craigslist.org/images/map/zoom-in.png", "Craigslist"],
     ["http://diply.com/v2/img/diply.jpg", "Diply"]
 ];
+/*for (i = 0; i < urls.length; i++) {
 setTimeout(function () {
-   // document.getElementById("visited").innerHTML = "<b>Out of the top 15 sites, these are the ones you've visited:</b><br />";
-  //  document.getElementById("notvisited").innerHTML = "<b>These are the ones you haven't visited:</b><br />";
-    for (i = 0; i < urls.length; i++) {
         isRevisit(i);
+}, 3000*i);
+}*/
+
+var time = 0;
+
+var interval = setInterval(function () {
+    if (time < 15) {
+        isRevisit(time);
+        time++;
     }
-}, 3000);
+    else {
+        clearInterval(interval);
+    }
+}, 750);
 
         //https://rawgit.com/xAlanna/CSC203_/master/Project1AShalinskiCSC203.html
     </script>
