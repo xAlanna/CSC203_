@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+
+    <div id="calibration"></div>
+    <script>
+max_elapse = 0
+    
+function calibrate()
+{
+    document.getElementById("calibration").innerHTML = "Calibrating"
+    t = new Date();
+    var z = document.createElement("IMG");
+    z.onload = function(){
+        elps = (new Date()).getTime() - t.getTime();
+        if ( elps < 10 )
+            max_elapse = 10;
+        else
+            max_elapse = 1.2 * elps;
+        //document.getElementById("calibration").innerHTML = max_elapse + "(" + elps + ")";
+    }
+    z.src = "https://www.amazon.com/empty.gif";
+}
+    </script>
+
+    <img src="https://www.amazon.com/empty.gif" onload="calibrate()"><br>
+    Let me check on your browsing history.
+    <div id="invade"></div>
+
+    <script>
+function isRevisit(url)
+{
+    hostname = url.split("//")[1].split("/")[0]
+    t1 = new Date();
+    var x = document.createElement("IMG")
+    x.onload = function(){
+        document.body.appendChild(x);
+        elapsed = ((new Date()).getTime() - t1.getTime());
+        if ( elapsed < max_elapse)
+            mesg = "You have been to " + hostname +", haven't you!";
+        else
+            mesg = "I'm guessing you haven't been to " + hostname;
+        document.getElementById("invade").innerHTML = mesg + " DEBUG(" + elapsed + "/" + max_elapse + ")";
+    }
+    x.src = url
+}
+
+setTimeout(function () { isRevisit("http://www.irs.gov/static_assets/img/logo.png"); }, 3000);
+var urls = [
+    ["", "Google"]
+    ["", "YouTube"],
+    ["https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia_wordmark.png", "Wikipedia"],
+    ["http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png", "Ebay"],
+    ["https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico", "Netflix"],
+];
+    </script>
+</body>
+</html>
