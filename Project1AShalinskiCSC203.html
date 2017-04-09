@@ -12,7 +12,7 @@ max_elapse = 0
     
 function calibrate()
 {
-    document.getElementById("calibration").innerHTML = "Calibrating"
+    //document.getElementById("calibration").innerHTML = "Calibrating"
     t = new Date();
     var z = document.createElement("IMG");
     z.onload = function(){
@@ -28,7 +28,7 @@ function calibrate()
     </script>
 
     <img src="https://www.amazon.com/empty.gif" onload="calibrate()"><br>
-    <div>Let me check on your browsing history.</div>
+    <div>Let me check on your browsing history.</div><br /><br />
     <table style="border-spacing:50px 0;text-align:center;">
         <tr>
             <td id="visited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /><br /></td>
