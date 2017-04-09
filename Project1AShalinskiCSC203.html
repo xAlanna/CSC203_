@@ -8,91 +8,88 @@
 
     <div id="calibration"></div>
     <script>
-max_elapse = 0
+        max_elapse = 0
     
-function calibrate()
-{
-    //document.getElementById("calibration").innerHTML = "Calibrating"
-    t = new Date();
-    var z = document.createElement("IMG");
-    z.onload = function(){
-        elps = (new Date()).getTime() - t.getTime();
-        if ( elps < 10 )
-            max_elapse = 10;
-        else
-            max_elapse = 1.2 * elps;
-        //document.getElementById("calibration").innerHTML = max_elapse + "(" + elps + ")";
-    }
-    z.src = "https://www.amazon.com/empty.gif";
-}
+        function calibrate()
+        {
+            //document.getElementById("calibration").innerHTML = "Calibrating"
+            t = new Date();
+            var z = document.createElement("IMG");
+            z.onload = function(){
+                elps = (new Date()).getTime() - t.getTime();
+                if ( elps < 10 )
+                    max_elapse = 10;
+                else
+                    max_elapse = 1.2 * elps;
+                //document.getElementById("calibration").innerHTML = max_elapse + "(" + elps + ")";
+            }
+            z.src = "https://www.amazon.com/empty.gif";
+        }
     </script>
 
     <img src="https://www.amazon.com/empty.gif" onload="calibrate()"><br>
-    <div>Let me check on your browsing history.</div><br /><br />
+    <div>
+        Let me check on your browsing history.<br /><br />
+        <b>Out of the top 15 most visited sites in the US,</b><br /><br/>
+    </div>
+
     <table style="border-spacing:50px 0;text-align:center;">
         <tr>
-            <td id="visited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /><br /></td>
-            <td id="notvisited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>These are the ones you haven't visited:</b><br /><br/></td>
+            <td id="visited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>You've visited:</b><br /><br /></td>
+            <td id="notvisited" style="vertical-align:top;border:1px solid black;padding:10px;"><b>You haven't visited:</b><br /><br/></td>
         </tr>
     </table>
     <br />
-    <!--<div id="visited"><b>Out of the top 15 sites, these are the ones you've visited:</b><br /></div>
-    <br />
-    <div id="notvisited"><b>These are the ones you haven't visited:</b><br /></div>-->
 
     <script>
-function isRevisit(site)
-{
-    var url = urls[site][0];
-    t1 = new Date();
-    var x = document.createElement("IMG")
-    x.style.display = "none";
-    x.onload = function(){
-        document.body.appendChild(x);
-        elapsed = ((new Date()).getTime() - t1.getTime());
-        if (elapsed < max_elapse){
-                document.getElementById("visited").innerHTML = document.getElementById("visited").innerHTML + urls[site][1] + "<br />";
+        function isRevisit(site)
+        {
+            var url = urls[site][0];
+            t1 = new Date();
+            var x = document.createElement("IMG");
+            x.style.display = "none";
+            x.onload = function(){
+                document.body.appendChild(x);
+                elapsed = ((new Date()).getTime() - t1.getTime());
+                if (elapsed < max_elapse){
+                    document.getElementById("visited").innerHTML = document.getElementById("visited").innerHTML + urls[site][1] + "<br />";
+                }
+                else{
+                    document.getElementById("notvisited").innerHTML = document.getElementById("notvisited").innerHTML + urls[site][1] + "<br />";
+                }
+            }
+            x.src = url;
         }
-        else{
-                document.getElementById("notvisited").innerHTML = document.getElementById("notvisited").innerHTML + urls[site][1] + "<br />";
-        }
-    }
-    x.src = url;
-}
-var urls = [
-    ["https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png", "Google"],
-    ["https://s.ytimg.com/yts/imgbin/www-hitchhiker-vflNVER5Q.webp", "YouTube"],
-    ["https://www.facebook.com/rsrc.php/v3/yn/r/m1WkWOIIcpj.png", "Facebook"],
-    ["https://www.redditstatic.com/sprite-reddit.6Om8v6KMv28.png", "Reddit"],
-    ["https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global_bluebeacon-1x_optimized._CB281044790_.png", "Amazon"],
-    ["https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia_wordmark.png", "Wikipedia"],
-    ["https://s.yimg.com/zz/nn/lib/metro/g/my/yahoo_en-US_f_p_190x45_2x.png", "Yahoo"],
-    ["https://abs.twimg.com/a/1491551685/img/search/ic_places_foursquare_logo.png", "Twitter"],
-    ["http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png", "Ebay"],
-    ["https://assets.nflxext.com/ffe/siteui/acquisition/home/thisIsNetflix/modules/asset_cancelanytime_withdevice.png", "Netflix"],
-    ["http://s.imgur.com/images/site-sprite.png?1430420391", "imgur"],
-    ["https://static.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y", "LinkedIn"],
-    ["https://www.instagram.com/static/sprites/core/8f1312.png", "Instagram"],
-    ["https://www.craigslist.org/images/map/zoom-in.png", "Craigslist"],
-    ["http://diply.com/v2/img/diply.jpg", "Diply"]
-];
-/*for (i = 0; i < urls.length; i++) {
-setTimeout(function () {
-        isRevisit(i);
-}, 3000*i);
-}*/
 
-var time = 0;
+        var urls = [
+          ["https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_120x44dp.png", "Google"],
+          ["https://s.ytimg.com/yts/imgbin/www-hitchhiker-vflNVER5Q.webp", "YouTube"],
+          ["https://www.facebook.com/rsrc.php/v3/yn/r/m1WkWOIIcpj.png", "Facebook"],
+          ["https://www.redditstatic.com/sprite-reddit.6Om8v6KMv28.png", "Reddit"],
+          ["https://images-na.ssl-images-amazon.com/images/G/01/gno/sprites/nav-sprite-global_bluebeacon-1x_optimized._CB281044790_.png", "Amazon"],
+          ["https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia_wordmark.png", "Wikipedia"],
+          ["https://s.yimg.com/zz/nn/lib/metro/g/my/yahoo_en-US_f_p_190x45_2x.png", "Yahoo"],
+          ["https://abs.twimg.com/a/1491551685/img/search/ic_places_foursquare_logo.png", "Twitter"],
+          ["http://ir.ebaystatic.com/rs/v/fxxj3ttftm5ltcqnto1o4baovyl.png", "Ebay"],
+          ["https://assets.nflxext.com/ffe/siteui/acquisition/home/thisIsNetflix/modules/asset_cancelanytime_withdevice.png", "Netflix"],
+          ["http://s.imgur.com/images/site-sprite.png?1430420391", "imgur"],
+          ["https://static.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y", "LinkedIn"],
+          ["https://www.instagram.com/static/sprites/core/8f1312.png", "Instagram"],
+          ["https://www.craigslist.org/images/map/zoom-in.png", "Craigslist"],
+          ["http://diply.com/v2/img/diply.jpg", "Diply"]
+        ];
 
-var interval = setInterval(function () {
-    if (time < 15) {
-        isRevisit(time);
-        time++;
-    }
-    else {
-        clearInterval(interval);
-    }
-}, 750);
+        var numOfSites = 0;
+
+        var interval = setInterval(function () {
+            if(numOfSites < urls.length) {
+                isRevisit(numOfSites);
+                numOfSites++;
+            }
+            else {
+                clearInterval(interval);
+            }
+        }, 750);
 
         //https://rawgit.com/xAlanna/CSC203_/master/Project1AShalinskiCSC203.html
     </script>
