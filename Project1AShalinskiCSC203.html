@@ -29,7 +29,8 @@ function calibrate()
 
     <img src="https://www.amazon.com/empty.gif" onload="calibrate()"><br>
     Let me check on your browsing history.
-    <div id="invade"></div>
+    <div id="visited"></div>
+    <div id="notvisited"></div>
 
     <script>
 function isRevisit(site)
@@ -43,7 +44,7 @@ function isRevisit(site)
         elapsed = ((new Date()).getTime() - t1.getTime());
         if (elapsed < max_elapse){
             urls[site][2] = 1;
-                document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + urls[site][1] + "<br />";
+             //   document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + urls[site][1] + "<br />";
         }
      //   document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + "<br />" + mesg + " DEBUG(" + elapsed + "/" + max_elapse + ")";
     }
@@ -69,11 +70,17 @@ var urls = [
     ["http://diply.com/v2/img/diply.jpg", "Diply", 0]
 ];
 setTimeout(function () {
+    document.getElementById("visited").innerHTML = "Out of the top 15 sites, these are the ones you've visited:<br />";
+    document.getElementById("notvisited").innerHTML = "These are the ones you haven't visited:<br />";
     for (i = 0; i < urls.length; i++) {
         isRevisit(i);
         if(urls[i][2] == 1){
-        document.getElementById("invade").innerHTML = document.getElementById("invade").innerHTML + urls[i][1] + "<br />";
-            }
+        document.getElementById("visited").innerHTML = document.getElementById("visited").innerHTML + urls[i][1] + "<br />";
+        }
+        if (urls[i][2] == 0) {
+            document.getElementById("notvisited").innerHTML = document.getElementById("notvisited").innerHTML + urls[i][1] + "<br />";
+        }
+   
     }
 }, 3000);
 
